@@ -484,3 +484,7 @@ Add more books to the register
 The MEAN stack—comprising MongoDB, Express.js, AngularJS (or Angular), and Node.js—provides a powerful and cohesive set of technologies for building modern web applications.
 
 Together, these technologies allow developers to use JavaScript throughout the entire development process, from front-end to back-end, promoting a unified and streamlined development workflow.
+
+## Congratulations on making it this far 🥇
+<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2xzbmRvNXczdWhtc3luZXRqMmF1ZzVyMXFhaGp6MTU3cW5vcnQ3OSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KAw0oBpBXAQbkVS4yG/giphy.gif" style="width:1000px;" >
+
