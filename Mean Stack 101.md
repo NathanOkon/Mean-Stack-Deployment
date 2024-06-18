@@ -29,8 +29,8 @@ __3.__ The security group was configured with the following inbound rules:
 - Allow traffic on port 5000 (Custom TCP) with source from anywhere.
 
 - Allow traffic on port 3000 (Custom TCP) with source from anywhere.
-![Security Rules](./Images/P0.png)
-![P1](./Images/P1.png)
+![Security Rules](./Images/D1.png)
+![D2](./Images/D2.png)
 
 
 ## Step 1 - Install Nodejs
@@ -42,27 +42,27 @@ __1.__ __Update and Upgrade ubuntu__
 ```bash
 sudo apt update && sudo apt upgrade -y
 ```
-![P2](./Images/P2.png)
+![D2](./Images/D3.png)
 
 __2.__ __Add certificates__
 
 ```bash
 sudo apt -y install curl dirmngr apt-transport-https lsb-release ca-certificates
 ```
-![P3](./Images/P3.png)
+![D4](./Images/D4.png)
 
 
 ```bash
 curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 ```
-![P4](./Images/P4.png)
+![D5](./Images/D5.png)
 
 __.3__ __Install NodeJS__
 
 ```bash
 sudo apt-get install -y nodejs
 ```
-![P5](./Images/P5.png)
+![D6](./Images/D6.png)
 
 
 ## Step 2 - Install MongoDB
@@ -72,9 +72,12 @@ For this application, Book records were added to MongoDB that contain book name,
 __1.__ __Download the MongoDB public GPG key__
 
 ```bash
-wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key add -
-echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+curl -fsSL https://pgp.mongodb.com/server-7.0.asc | sudo gpg --dearmor -o /usr/share/keyrings/mongodb-archive-keyring.gpg
 
+```
+Create a list file for MongoDB Create the /etc/apt/sources.list.d/mongodb-org-7.0.list file for Ubuntu 22.04:
+```
+echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-7.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-7.0.list
 ```
 
 __2.__ __Update the package database and install MongoDB__
@@ -84,7 +87,8 @@ sudo apt-get update
 
 sudo apt-get install -y mongodb-org
 ```
-![P6](./Images/P6.png)
+![D7](./Images/D7.png)
+![D8](./Images/D8.png)
 
 
 __3.__ __Start and enable MongoDB__
@@ -98,7 +102,7 @@ sudo systemctl enable mongod
 ```bash
 sudo systemctl status mongod
 ```
-![Start Mongodb](./images/start-n-enable-db.png)
+![Start Mongodb](./Images/D9.png)
 
 __5.__ __Install body-parser package__
 
@@ -107,7 +111,7 @@ __body-parser__ package is needed to help process JSON files passed in requests 
 ```bash
 sudo npm install body-parser
 ```
-![Install body-parser](./images/install-body-parser.png)
+![Install body-parser](./Images/D10.png)
 
 __6.__ __Create the project root folder named ‘Books’__
 
@@ -119,7 +123,7 @@ Initialize the root folder
 ```bash
 npm init
 ```
-![init folder](./images/init-proj-dir.png)
+![init folder](./Images/D11.png)
 
 __Add file named server.js to Books folder__
 ```bash
@@ -152,7 +156,7 @@ app.listen(app.get('port'), () => {
   console.log('Server up: http://localhost:' + app.get('port'));
 });
 ```
-![Server.js](./images/serverjs.png)
+![Server.js](./Images/D12.png)
 
 
 ## Step 3 - Install Express and set up routes to the server
@@ -165,7 +169,7 @@ __1.__ __Install express and mongoose__
 ```bash
 sudo npm install express mongoose
 ```
-![Install express](./images/install-express-mongoose.png)
+![Install express](./Images/D13.png)
 
 __2.__ __In Books folder, create a folder named ‘apps’__
 
@@ -260,7 +264,7 @@ module.exports = function(app) {
   });
 };
 ```
-![Routes](./images/routejs.png)
+![Routes](./Images/D14.png)
 
 __3.__ __In the ‘apps’ folder, create a folder named models__
 
@@ -272,7 +276,6 @@ __In models, create a file named book.js__
 ```bash
 vim book.js
 ```
-![](./images/cd-route-model.png)
 
 Copy and paste the code below into book.js
 
@@ -288,7 +291,7 @@ const bookSchema = new mongoose.Schema({
 
 module.exports = mongoose.model('Book', bookSchema);
 ```
-![books](./images/bookjs.png)
+![books](./Images/D15.png)
 
 
 ## Step 4 - Access the routes with AngularJS
@@ -387,7 +390,7 @@ app.controller('myCtrl', function($scope, $http) {
   };
 });
 ```
-![Script.js](./images/scriptjs.png)
+![Script.js](./Images/D16.png)
 
 
 __2.__ __In ‘public’ folder, create a file named index.html__
@@ -453,7 +456,7 @@ Copy and paste the code below into index.html file
 </body>
 </html>
 ```
-![HTML](./images/indexhtml.png)
+![HTML](./Images/D16.png)
 
 __3.__ __Change the directory back up to ‘Books’ and start the server__
 
@@ -463,21 +466,18 @@ cd ..
 ```bash
 node server.js
 ```
-![Run server](./images/run-server.png)
+![Run server](./Images/D18.png)
 
 The server is now up and running, Connection to it is via port 3300. A separate Putty or SSH console to test what curl command returns locally can be launched.
 
 The Book Register web application can now be accessed from the internet with a browser using the Public IP address or Public DNS name.
 
-![Book register](./images/bookreg.png)
+![Book register](./Images/D19.png)
 
 Add more books to the register
 
-![Book register](./images/book-reg-webapp.png)
+![Book register](./Images/D20.png)
 
-Get the json view
-
-![Book register](./images/book-json.png)
 
 ## Conclusion
 
